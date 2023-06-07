@@ -1,0 +1,15 @@
+name: Entire Project CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-chatui:
+    uses: ./.github/workflows/publish-docker-images.yml
+    with:
+      path: ./Server
+      image_name: ghcr.io/exlted/just-another-websocket-server
+    secrets:
+      username: ${{ github.repository_owner }}
+      password: ${{ secrets.REGISTRY_TOKEN }}
